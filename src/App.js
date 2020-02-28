@@ -7,12 +7,33 @@ import './App.css';
 class App extends Component {
   state = {
     amount: 10,
-    employees: []
+    employees: [],
+    filteredEmp:[],
+    search: ''
+  }
+  
+  filterStuff = arr => {
+    const filtered = arr.filter(emp => (emp.name.first.includes(this.state.search)));
+    console.log(filtered)
+    return filtered
+  }
+
+  handleChange = event => {
+    let val = event.target.value;
+    this.setState({search: val})
+    if (val === ''){
+      this.setState({ filteredEmp: this.state.employees });
+    } else {
+      this.setState({ filteredEmp: this.filterStuff(this.state.employees)});
+    }
   }
 
   componentDidMount = () => {
     API.getEmployees(this.state.amount).then(employees => {
-      this.setState({ employees: employees.data.results });
+      this.setState({ 
+        employees: employees.data.results,
+        filteredEmp: employees.data.results
+      });
       console.log(this.state.employees);
     })
   }
@@ -21,8 +42,11 @@ class App extends Component {
   render = () => {
     return (
       <div className="App ">
-        <Header />
-        <Table employees={this.state.employees} />
+        <Header 
+          search={this.state.search}
+          handleChange={this.handleChange}
+        />
+        <Table employees={this.state.filteredEmp} />
       </div>
     );
   }
