@@ -8,7 +8,6 @@ function Search(props) {
                 type="search"
                 placeholder="Enter a name"
                 aria-label="search"
-                value={props.search}
                 onChange={props.handleChange}
             />
             {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> */}

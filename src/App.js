@@ -6,26 +6,27 @@ import './App.css';
 
 class App extends Component {
   state = {
-    amount: 10,
+    amount: 200,
     employees: [],
     filteredEmp:[],
-    search: ''
   }
   
-  filterStuff = arr => {
-    const filtered = arr.filter(emp => (emp.name.first.includes(this.state.search)));
-    console.log(filtered)
+  filterStuff = (arr,val) => {
+    const filtered = arr.filter(emp => (emp.name.first.includes(val)) || (emp.name.last.includes(val)));
+    // console.log(filtered)
     return filtered
   }
 
   handleChange = event => {
     let val = event.target.value;
-    this.setState({search: val})
-    if (val === ''){
-      this.setState({ filteredEmp: this.state.employees });
-    } else {
-      this.setState({ filteredEmp: this.filterStuff(this.state.employees)});
-    }
+    console.log(val)
+    // this.setState({search: val})
+    // if (val === ''){
+    //   this.setState({ filteredEmp: this.state.employees });
+    // } else {
+    //   this.setState({ filteredEmp: this.filterStuff(this.state.employees)}, this.render);
+    // }
+    this.setState({ filteredEmp: this.filterStuff(this.state.employees, val)});
   }
 
   componentDidMount = () => {
@@ -34,16 +35,17 @@ class App extends Component {
         employees: employees.data.results,
         filteredEmp: employees.data.results
       });
-      console.log(this.state.employees);
+      // console.log(this.state.employees);
     })
   }
 
 
   render = () => {
+    console.log(this.state.filteredEmp)
+    // console.log(this.state.employees)
     return (
       <div className="App ">
         <Header 
-          search={this.state.search}
           handleChange={this.handleChange}
         />
         <Table employees={this.state.filteredEmp} />

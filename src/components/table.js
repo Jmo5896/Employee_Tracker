@@ -20,13 +20,13 @@ function Table(props){
 
                 <Row 
                     image={employee.picture.thumbnail}
-                    id={employee.id.value.split('-')[2]}
+                    id={employee.id.value}
                     name={`${employee.name.first} ${employee.name.last}`}
                     gender={employee.gender}
                     phone={employee.phone}
                     username={employee.login.username}
                     email={employee.email}
-                    key={employee.id.value.split('-')[2]}
+                    key={employee.id.value}
                 />
                 ))}
             </tbody>

@@ -8,7 +8,6 @@ function Header(props){
     <p className="lead">Enter name you'd like to search by below:</p>
     <hr className="my-2" />
     <Search 
-    search={props.search}
     handleChange={props.handleChange}
     />
 </div>
