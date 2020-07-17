@@ -36,7 +36,8 @@ class App extends Component {
   }
 
   filterStuff = (arr,val) => {
-    const filtered = arr.filter(emp => (emp.name.first.includes(val)) || (emp.name.last.includes(val)));
+    console.log(arr)
+    const filtered = arr.filter(emp => (emp.first.includes(val)) || (emp.last.includes(val)));
     return filtered
   }
 
